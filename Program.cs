@@ -6,7 +6,7 @@ namespace P0_Justin_Peifer
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-        }
+        new MainMenu().Menu(); 
     }
+}
 }
