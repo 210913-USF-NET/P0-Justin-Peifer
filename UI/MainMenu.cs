@@ -15,7 +15,7 @@ namespace UI
                 Console.WriteLine("Press [2] to view order details and place new orders.");
                 Console.WriteLine("Press [3] to view and edit individual store information.");
                 Console.WriteLine("Press [4] to view and edit inventory data.");
-                Console.WriteLine("Press[x] to leave.")
+                Console.WriteLine("Press[x] to leave.");
                 input = Console.ReadLine();
 
                 switch (input)
