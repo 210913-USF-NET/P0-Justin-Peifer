@@ -1,16 +1,18 @@
 using System;
-
+using Models;
+using SBL;
+using DL;
 namespace UI
 {
-    public class MainMenu
+    public class ManagerMenu : IMenu
     {
-        public void Menu()
+        public void Start()
         {
             bool exit = false;
             string input = "";
             do
             {
-                Console.WriteLine("Welcome to the store app!");
+                Console.WriteLine("Welcome to the Beelicious Manager Menu!");
                 Console.WriteLine("Press [1] to view and edit customers data.");
                 Console.WriteLine("Press [2] to view order details and place new orders.");
                 Console.WriteLine("Press [3] to view and edit individual store information.");
@@ -28,7 +30,7 @@ namespace UI
                         Console.WriteLine("Edit this to redirect to orders menu");
                         break;
                     case "3":
-                        Console.WriteLine("Edit this to redirect to franchise menu");
+                        new FranchiseMenu(new BL(new StoreFrontRepo())).Start();
                         break;
                     case "4":
                         Console.WriteLine("Edit this to redirect to inventory menu");
@@ -45,6 +47,5 @@ namespace UI
                 }
             } while (!exit);
         }
-        
     }
 }
