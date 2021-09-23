@@ -21,6 +21,8 @@ namespace UI
                     return new ManagerMenu();
                 case "storefront":
                     return new FranchiseMenu(new BL(new StoreFrontRepo()));
+                case "login":
+                    //return new LoginMenu(new BL(new UserRepo()));
                 // case "newuser":
                 //     return new AddUser(new BL(new UserRepo()));
                 default:

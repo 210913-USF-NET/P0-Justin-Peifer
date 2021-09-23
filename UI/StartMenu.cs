@@ -19,7 +19,7 @@ namespace UI
                 switch (input)
                 {
                     case "1":
-                        Console.WriteLine("Edit this to go to a login page");
+                        MenuFactory.GetMenu("login").Start();
                         break;
 
                     case "2":

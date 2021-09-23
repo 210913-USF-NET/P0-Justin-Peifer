@@ -31,4 +31,23 @@ namespace SBL
             return _repo.UpdateStoreFront(storeToUpdate);
         }
     }
+        
+public class UBL
+    {
+        private IUserRepo _repo;
+        public User AddUser(User user)
+        {
+            return _repo.AddUser(user);
+        }
+
+        public List<User> GetAllUsers()
+        {
+            return _repo.GetAllUsers();
+        }
+
+        public User UpdateUser(User userToUpdate)
+        {
+            return _repo.UpdateUser(userToUpdate);
+        } 
+    }
 }

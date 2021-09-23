@@ -6,24 +6,12 @@ namespace Models
     {
         public User(){}
 
-        public User(string name) {
-            this.Name = name;
-        }
-
-        public string Name {get; set;} //property, belongs in a type
-
-        //constructor chaining
-        public User(string name, int age) :this(name)
-        {
-            this.Age = age;
-        }
-
-        public User(string name, int age, string email, string password, string access) :this(name)
+        public User(string name, int age, string email, string password)
         {
             this.Age = age;
             this.Email = email;
             this.Password = password;
-            this.Access = access;
+            this.Access = false;
         }
 
         public int Age{get; set;}
@@ -32,7 +20,7 @@ namespace Models
 
         public string Password{get; set;}
 
-        public string Access{get;set;}//is this a customer, manager, or VIP?
+        public bool Access{get;set;}//is this a customer, manager, or VIP?
 
         // public List<Order> Orders 
         // {

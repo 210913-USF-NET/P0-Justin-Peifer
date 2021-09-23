@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace DL
 {
-    public class UserRepo
+    public class UserRepo : IUserRepo
     {
         //this is a relative path from where the program is running
         //aka UI folder
