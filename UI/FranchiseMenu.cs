@@ -9,10 +9,12 @@ namespace UI
     public class FranchiseMenu : IMenu
     {
         private IBL _bl;
+        //private StoreFrontService _storeFrontService;
 
         public FranchiseMenu(IBL bl)
         {
             _bl = bl;
+            // _storeFrontService = storeFrontService;
         }
 
         public void Start(){
@@ -28,7 +30,7 @@ namespace UI
                 switch (Console.ReadLine())
                 {
                     case "0":
-                        CreateStoreFront();
+                        //CreateStoreFront();
                         break;
                     case "1":
                         ViewAllStoreFronts();
@@ -43,19 +45,19 @@ namespace UI
             } while (!exit);
         }
 
-        private void CreateStoreFront(){
-            System.Console.WriteLine("Creating new store");
-            System.Console.WriteLine("Name: ");
-            string name = Console.ReadLine();
-            System.Console.WriteLine("City");
-            string city = Console.ReadLine();
-            System.Console.WriteLine("State");
-            string state = Console.ReadLine();
+        // private void CreateStoreFront(){
+        //     System.Console.WriteLine("Creating new store");
+        //     System.Console.WriteLine("State: ");
+        //     string state = Console.ReadLine();
+        //     System.Console.WriteLine("Zipcode:");
+        //     int zipcode = int.Parse(Console.ReadLine());
 
-            StoreFront newStore = new StoreFront(name, city, state);
-            _bl.AddStoreFront(newStore);
-            Console.WriteLine($"You created {newStore.ToString()}");
-        }
+        //     StoreFront newStore = new StoreFront(state, zipcode);
+        //     _bl.CreateStoreFront(newStore);
+        //     Console.WriteLine($"You created {newStore.ToString()}");
+        // }
+        
+
         
         private void ViewAllStoreFronts()
         {

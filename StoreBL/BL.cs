@@ -20,34 +20,30 @@ namespace SBL
             return _repo.GetAllStoreFronts();
         }
 
-        public StoreFront AddStoreFront(StoreFront store)
-        {
-            return _repo.AddStoreFront(store);
-        }
+        // public StoreFront CreateStoreFront(StoreFront store)
+        // {
+        //     return _repo.CreateStoreFront(store);
+        // }
 
-        public StoreFront UpdateStoreFront(StoreFront storeToUpdate)
-        {
-            //add logic to update StoreFront
-            return _repo.UpdateStoreFront(storeToUpdate);
-        }
-    }
+        // public StoreFront UpdateStoreFront(StoreFront storeToUpdate)
+        // {
+        //     //add logic to update StoreFront
+        //     return _repo.UpdateStoreFront(storeToUpdate);
+        // }
         
-public class UBL
-    {
-        private IUserRepo _repo;
-        public User AddUser(User user)
-        {
-            return _repo.AddUser(user);
-        }
+        // public User AddUser(User user)
+        // {
+        //     return _repo.AddUser(user);
+        // }
 
         public List<User> GetAllUsers()
         {
             return _repo.GetAllUsers();
         }
 
-        public User UpdateUser(User userToUpdate)
-        {
-            return _repo.UpdateUser(userToUpdate);
-        } 
+        // public User UpdateUser(User userToUpdate)
+        // {
+        //     return _repo.UpdateUser(userToUpdate);
+        // } 
     }
 }

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace DL
 {
-    public class StoreFrontRepo : IRepo
+    public class StoreFrontRepo
     {
         //this is a relative path from where the program is running
         //aka UI folder

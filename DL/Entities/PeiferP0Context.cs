@@ -45,20 +45,25 @@ namespace DL.Entities
 
             modelBuilder.Entity<LineItem>(entity =>
             {
+                entity.HasKey(e => new { e.OrderId, e.ProductId })
+                    .HasName("PK__LineItem__08D097A3BBEAFBD0");
+
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.LineItems)
                     .HasForeignKey(d => d.OrderId)
-                    .HasConstraintName("FK__LineItems__Order__693CA210");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__LineItems__Order__6EF57B66");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.LineItems)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__LineItems__Produ__6B24EA82");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__LineItems__Produ__70DDC3D8");
 
                 entity.HasOne(d => d.Store)
                     .WithMany(p => p.LineItems)
                     .HasForeignKey(d => d.StoreId)
-                    .HasConstraintName("FK__LineItems__Store__6A30C649");
+                    .HasConstraintName("FK__LineItems__Store__6FE99F9F");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -73,12 +78,17 @@ namespace DL.Entities
 
             modelBuilder.Entity<Product>(entity =>
             {
-                entity.Property(e => e.Description)
-                    .HasMaxLength(1)
-                    .IsUnicode(false);
+                entity.Property(e => e.Description).HasColumnType("text");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<StoreFront>(entity =>
+            {
+                entity.Property(e => e.State)
+                    .HasMaxLength(2)
                     .IsUnicode(false);
             });
 

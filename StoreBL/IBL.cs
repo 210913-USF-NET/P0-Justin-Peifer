@@ -11,8 +11,8 @@ namespace SBL
     {
         List<StoreFront> GetAllStoreFronts();
 
-        StoreFront AddStoreFront(StoreFront store);
+        // StoreFront CreateStoreFront(StoreFront store);
 
-        StoreFront UpdateStoreFront(StoreFront StoreFrontToUpdate);
+        // StoreFront UpdateStoreFront(StoreFront StoreFrontToUpdate);
     }
 }

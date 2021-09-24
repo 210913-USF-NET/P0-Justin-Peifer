@@ -8,26 +8,20 @@ namespace Models
         //default empty constructor
         public StoreFront() {}
 
-        //constructor overloading
-        public StoreFront(string name)
-        {
-            this.Name = name;
-        }
-
         //Constructor chaining
-        public StoreFront(string name, string city, string state) : this(name)
+        public StoreFront(string state, int zipcode)
         {
-            this.City = city;
+            this.Zipcode = zipcode;
             this.State = state;
+            
         }
 
         //this is type member
         //this is an example of property
-        public string Name { get; set; }
-
-        public string City { get; set; }
-
         public string State { get; set; }
+
+        public int? Zipcode { get; set; }
+        public int Id { get; set; }
 
         // //this is field
         // private string _name;
@@ -45,7 +39,7 @@ namespace Models
 
         public override string ToString()
         {
-            return $"Name: {this.Name}, City: {this.City}, State: {this.State}";
+            return $"State: {this.State} Zipcode: {this.Zipcode} ID Number :{this.Id}";
         }
     }
 }

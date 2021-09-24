@@ -15,6 +15,7 @@ namespace DL.Entities
 
         public int Id { get; set; }
         public int? ZipCode { get; set; }
+        public string State { get; set; }
 
         public virtual ICollection<Inventory> Inventories { get; set; }
         public virtual ICollection<LineItem> LineItems { get; set; }

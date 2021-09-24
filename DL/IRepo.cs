@@ -5,8 +5,10 @@ namespace DL
 {
     public interface IRepo
     {
-        StoreFront AddStoreFront(StoreFront store);
+        //StoreFront CreateStoreFront(StoreFront store);
         List<StoreFront> GetAllStoreFronts();
-        StoreFront UpdateStoreFront(StoreFront storeToUpdate);
+        
+        List<User> GetAllUsers();
+        //StoreFront UpdateStoreFront(StoreFront storeToUpdate);
     }
 }
