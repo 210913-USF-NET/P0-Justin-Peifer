@@ -22,24 +22,11 @@ namespace Models
 
         public int? Zipcode { get; set; }
         public int Id { get; set; }
-
-        // //this is field
-        // private string _name;
-
-        // //this is a wrapper for the field above
-        // public string GetName()
-        // {
-        //     return _name;
-        // }
-
-        // public void SetName(string value)
-        // {
-        //     _name = value;
-        // }
+        public List<Inventory> Inventory { get; set; }
 
         public override string ToString()
         {
-            return $"State: {this.State} Zipcode: {this.Zipcode} ID Number :{this.Id}";
+            return $"State: {this.State} Zipcode: {this.Zipcode}";
         }
     }
 }

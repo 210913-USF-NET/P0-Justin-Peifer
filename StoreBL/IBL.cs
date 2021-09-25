@@ -10,7 +10,11 @@ namespace SBL
     public interface IBL
     {
         List<StoreFront> GetAllStoreFronts();
+        List<User> GetAllUsers();
+        List<Product> GetAllProducts();
+        List<Inventory> GetAllInventory();
 
+        StoreFront StoreById(int id);
         // StoreFront CreateStoreFront(StoreFront store);
 
         // StoreFront UpdateStoreFront(StoreFront StoreFrontToUpdate);

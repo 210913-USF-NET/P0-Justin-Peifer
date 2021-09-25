@@ -1,10 +1,15 @@
 namespace Models
 {
     public class LineItem
-    //pretty much the same as inventory, but used for orders instead
     {
-        public Product Item {get;set;}
+        public int OrderId { get; set; }
+        public int? StoreId { get; set; }
+        public int ProductId { get; set; }
+        public int? Quantity { get; set; }
 
-        public int Quantities {get; set;}
+        
+        public virtual Order Order { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual StoreFront Store { get; set; }
     }
 }

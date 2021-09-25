@@ -41,9 +41,27 @@ namespace SBL
             return _repo.GetAllUsers();
         }
 
-        // public User UpdateUser(User userToUpdate)
-        // {
-        //     return _repo.UpdateUser(userToUpdate);
-        // } 
+        public List<Product> GetAllProducts()
+        {
+            return _repo.GetAllProducts();
+            
+        }
+
+        public Product ProductByID(int id)
+        {
+            return _repo.ProductByID(id);
+            
+        }
+        //products
+
+        public List<Inventory> GetAllInventory()
+        {
+            return _repo.GetAllInventory();
+        }
+
+        public StoreFront StoreById(int id)
+        {
+            return _repo.StoreById(id);
+            }
     }
 }

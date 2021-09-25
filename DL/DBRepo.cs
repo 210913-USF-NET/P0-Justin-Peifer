@@ -54,9 +54,8 @@ namespace DL
         //         }
                 
         //     }
-
         // }
-
+        
         public List<Model.User> GetAllUsers(){
 
             return _context.Users.Select(
@@ -87,5 +86,75 @@ namespace DL
                     }
             ).ToList();
         }
+
+        public Model.StoreFront StoreById(int id)
+        {
+            Entity.StoreFront storeById = 
+                _context.StoreFronts
+                .Include(i => i.Inventories)
+                .FirstOrDefault(i => i.Id == id);
+
+            return new Model.StoreFront() {
+                    Id = storeById.Id,
+                    Zipcode = storeById.ZipCode,
+                    State = storeById.State,
+                Inventory = storeById.Inventories.Select(i => new Model.Inventory(){
+                    Id = i.Id,
+                    ProductId = i.ProductId,
+                    Quantity = i.Quantity,
+                    
+                }).ToList()
+            };
+        }
+
+        //products
+        public List<Model.Product> GetAllProducts(){
+
+                    return _context.Products.Select(
+                        Product => new Model.Product() {
+                            Id = Product.Id,
+                            Name = Product.Name,
+                            Description = Product.Description,
+                            Price = Product.Price,
+                            Alcohol = Product.Alcohol
+                            }
+                    ).ToList();
+                }
+                
+        public Model.Product ProductByID(int id)
+        {
+            Entity.Product productByID = 
+                _context.Products
+                .FirstOrDefault(i => i.Id == id);
+
+            return new Model.Product() {
+                    Id = productByID.Id,
+                    Name = productByID.Name,
+                    Description = productByID.Description,
+                    Price = productByID.Price,
+                    Alcohol = productByID.Alcohol,
+                Inventory = productByID.Inventories.Select(i => new Model.Inventory(){
+                    Id = i.Id,
+                    ProductId = i.ProductId,
+                    Quantity = i.Quantity,
+                    
+                }).ToList()
+            };
+        }
+
+        //inventory
+
+        public List<Model.Inventory> GetAllInventory(){
+            //same as select * from Inventory in sql query
+            return _context.Inventories.Select(
+                Inventory => new Model.Inventory() {
+                    Id = Inventory.Id,
+                    StoreId = Inventory.StoreId,
+                    ProductId = Inventory.ProductId,
+                    Quantity = Inventory.Quantity
+                    }
+            ).ToList();
+        }
+        
     }
 }

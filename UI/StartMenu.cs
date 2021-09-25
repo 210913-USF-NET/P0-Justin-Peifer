@@ -9,6 +9,7 @@ namespace UI
         public void Start(){
             bool exit = false;
             string input = "";
+            
             do{
                 Console.WriteLine("Welcome to the Beelicious app!");
                 Console.WriteLine("Press [1] to login.");

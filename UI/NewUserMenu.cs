@@ -9,7 +9,7 @@ namespace UI
     {
         public void Start()
         {
-            
+            new StartMenu().Start(); 
             
         }
     }

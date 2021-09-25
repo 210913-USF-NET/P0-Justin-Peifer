@@ -1,9 +1,29 @@
+using System.Collections.Generic;
+
 namespace Models
 {
     public class Inventory
     {
-        public Product Item {get;set;}
+        
+        public int Id { get; set; }
+        public int? StoreId { get; set; }
+        
+        public int? ProductId { get; set; }
+        public int? Quantity { get; set; }
+        public List<Product> Products { get; set; }
 
-        public int Quantities {get; set;}
+        public virtual Product Product { get; set; }
+        public virtual StoreFront Store { get; set; }
+
+
+        public Inventory() {}
+        public Inventory(int storeId, int productId, int quantity){
+            this.StoreId = storeId;
+            this.ProductId = productId;
+            this.Quantity = quantity;
+        }
+
+        
     }
+
 }

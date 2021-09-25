@@ -27,63 +27,60 @@ namespace UI
 
             
             loginstart:
-            User currentUser = null;
+            User loginUser = null;
             System.Console.WriteLine("Email:");
             string loginEmail = System.Console.ReadLine();
             
             foreach (User user in allUsers)
             {
                 if (user.Email == loginEmail){
-                    currentUser = user;
-                    System.Console.WriteLine($"Welcome, {currentUser.Name}!");
+                    loginUser = user;
+                    System.Console.WriteLine($"Welcome, {loginUser.Name}!");
                     break;
                 }
             }
-            if (currentUser == null){
+            if (loginUser == null){
                 System.Console.WriteLine("User not found. Press [1] to try again, or press [2] to create a new account.");
                     
                     switch (System.Console.ReadLine())
                 {
                     case "1":
                         goto loginstart;
-                        break;
+                        
                     case "2":
-                        MenuFactory.GetMenu("newuser");
+                        new StartMenu().Start();
                         break;
                     default:
                         System.Console.WriteLine("Invalid input, please try again.");
                         goto loginstart;
-                        break;
                 }
                 
             }
-            
-            
-                // else {
-                //     System.Console.WriteLine("User not found. Press [1] to try again, or press [2] to create a new account.");
-                    
-                //     switch (System.Console.ReadLine();)
-                // {
-                //     case "1":
-                //         goto loginstart;
-                //     case "2"
-                //         MenuFactory("newuser")
-                //     default:
-                //         System.Console.WriteLine("Invalid input, please try again.");
-                //         goto loginstart;
-                // }
-                // }
 
+            passwordinput:
             System.Console.WriteLine("Password:");
             string loginPassword = System.Console.ReadLine();
-            if (currentUser.Password == loginPassword){
-                MenuFactory.GetMenu("order");
+            if (loginUser.Password == loginPassword){
+                MenuFactory.currentUser = loginUser;
+                MenuFactory.GetMenu("order").Start();
             }
-            else {
-                System.Console.WriteLine("Invalid password. Press [1] to try again, or press [2] to exit to the main menu.");
+            else{
+                System.Console.WriteLine("Invalid password.");
+                invalidpassword:
+                System.Console.WriteLine("Press [1] to try again, or press [2] to exit to the main menu.");
+                string input = System.Console.ReadLine();
+                    switch (input)
+                    {
+                        case "1":
+                            goto passwordinput;
+                            
+                        case "2":
+                            break;
+                        default:
+                            System.Console.WriteLine("Invalid input, please try again.");
+                            goto invalidpassword;
+                }
             }
-            
-            }
-
         }
+    }
 }
