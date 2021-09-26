@@ -28,5 +28,8 @@ namespace DL
 
         //inventory
         List<Inventory> GetAllInventory();
+
+        //Orders
+        Order NewOrder(int userId);
     }
 }

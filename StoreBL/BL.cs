@@ -51,6 +51,10 @@ namespace SBL
             return _repo.GetAllProducts();
             
         }
+        public Order NewOrder(int userId)
+        {
+            return _repo.NewOrder(userId);
+        }
 
         public Product ProductByID(int id)
         {

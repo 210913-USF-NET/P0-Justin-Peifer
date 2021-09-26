@@ -20,6 +20,31 @@ namespace DL
 
         
         
+        public Model.Order NewOrder(int UserId)
+        {
+            Entity.Order orderAdded = new Entity.Order(){
+                UserId = UserId,
+                DateOrdered = DateTime.Now,
+            };
+            
+            //this method adds the restoToAdd obj to change tracker
+            orderAdded = _context.Add(orderAdded).Entity;
+
+            //the "changes" don't get executed until you call the SaveChanges method
+            _context.SaveChanges();
+
+            //this clears the changetracker so it returns to a clean slate
+            _context.ChangeTracker.Clear();
+
+            return new Model.Order()
+            {
+                Id = orderAdded.Id,
+                DateOrdered = orderAdded.DateOrdered,
+                UserId = orderAdded.UserId
+            };
+        }
+
+
         public Model.User AddUser(Model.User user)
         {
             Entity.User userToAdd = new Entity.User(){
@@ -49,6 +74,9 @@ namespace DL
                 Email = userToAdd.Email
             };
         }
+
+
+
         public List<Model.User> GetAllUsers(){
 
             return _context.Users.Select(
@@ -150,6 +178,7 @@ namespace DL
                     }
             ).ToList();
         }
+        
         
     }
 }

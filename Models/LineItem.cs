@@ -11,5 +11,13 @@ namespace Models
         public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }
         public virtual StoreFront Store { get; set; }
+
+        public LineItem() {}
+
+        public LineItem (int StoreId, int ProductId, int Quantity){
+            this.StoreId = StoreId;
+            this.ProductId = ProductId;
+            this.Quantity = Quantity;
+        }
     }
 }

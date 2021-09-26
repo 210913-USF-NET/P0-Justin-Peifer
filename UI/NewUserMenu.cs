@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using SBL;
 using Models;
+using Serilog;
 
 namespace UI
 {

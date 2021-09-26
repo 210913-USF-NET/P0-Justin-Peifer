@@ -14,6 +14,7 @@ namespace SBL
         List<Product> GetAllProducts();
         List<Inventory> GetAllInventory();
         User AddUser(User user);
+        Order NewOrder(int userId);
 
         StoreFront StoreById(int id);
         // StoreFront CreateStoreFront(StoreFront store);
