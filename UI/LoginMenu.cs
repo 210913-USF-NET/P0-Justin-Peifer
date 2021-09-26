@@ -2,6 +2,7 @@ using System;
 using Models;
 using SBL;
 using DL;
+using Serilog;
 using System.Collections.Generic;
 
 namespace UI
@@ -56,29 +57,33 @@ namespace UI
                 }
                 
             }
-
-            passwordinput:
-            System.Console.WriteLine("Password:");
-            string loginPassword = System.Console.ReadLine();
-            if (loginUser.Password == loginPassword){
-                MenuFactory.currentUser = loginUser;
-                MenuFactory.GetMenu("order").Start();
-            }
             else{
-                System.Console.WriteLine("Invalid password.");
-                invalidpassword:
-                System.Console.WriteLine("Press [1] to try again, or press [2] to exit to the main menu.");
-                string input = System.Console.ReadLine();
-                    switch (input)
-                    {
-                        case "1":
-                            goto passwordinput;
-                            
-                        case "2":
-                            break;
-                        default:
-                            System.Console.WriteLine("Invalid input, please try again.");
-                            goto invalidpassword;
+
+                passwordinput:
+                System.Console.WriteLine("Password:");
+                string loginPassword = System.Console.ReadLine();
+                if (loginUser.Password == loginPassword){
+                    MenuFactory.currentUser = loginUser;
+                    Log.Information($"User number {loginUser.Id} ({loginUser.Name}) successfully logged in.");
+                    MenuFactory.GetMenu("order").Start();
+                }
+                else{
+                    System.Console.WriteLine("Invalid password.");
+                    invalidpassword:
+                    System.Console.WriteLine("Press [1] to try again, or press [2] to exit to the main menu.");
+                    string input = System.Console.ReadLine();
+                        switch (input)
+                        {
+                            case "1":
+                                goto passwordinput;
+                                
+                            case "2":
+                                break;
+                            default:
+                                System.Console.WriteLine("Invalid input, please try again.");
+                                goto invalidpassword;
+                    }
+
                 }
             }
         }
