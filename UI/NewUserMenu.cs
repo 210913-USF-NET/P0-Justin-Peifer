@@ -49,7 +49,7 @@ namespace UI
             // string newUserPass = new string(psw);
             User newUser = new User (newUserName, newUserAge, newUserEmail, newUserPass);
             _bl.AddUser(newUser);
-            
+            Log.Information($"Created a new user!");
         }
     }
 }

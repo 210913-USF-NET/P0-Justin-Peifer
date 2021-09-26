@@ -16,14 +16,9 @@ namespace UI
             DbContextOptions<PeiferP0Context> options = new DbContextOptionsBuilder<PeiferP0Context>()
             .UseSqlServer(connectionString).Options;
             PeiferP0Context context = new PeiferP0Context(options);
-            //this is an example of dependency injection
-            //I'm "injecting" an instance of business logic layer to restaurant menu, and an implementation of 
-            //IRepo to business logic
-            // IRepo dataLayer = new FileRepo();
-            // IBL businessLogic = new BL(dataLayer);
-            // IMenu restaurantMenu = new RestaurantMenu(businessLogic);
 
-            // restaurantMenu.Start();
+
+
             System.Console.WriteLine("");
             //for formatting
             switch (menuString.ToLower())
