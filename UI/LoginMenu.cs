@@ -65,7 +65,12 @@ namespace UI
                 if (loginUser.Password == loginPassword){
                     MenuFactory.currentUser = loginUser;
                     Log.Information($"User number {loginUser.Id} ({loginUser.Name}) successfully logged in.");
-                    MenuFactory.GetMenu("order").Start();
+                    if (loginUser.Access== true){
+                        MenuFactory.GetMenu("manager").Start();
+                    }
+                    else{
+                        MenuFactory.GetMenu("order").Start();
+                    }
                 }
                 else{
                     System.Console.WriteLine("Invalid password.");

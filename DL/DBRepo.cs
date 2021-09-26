@@ -18,44 +18,37 @@ namespace DL
             _context = context;
         }
 
-        // public Model.User AddUser(Model.User user){
-
-        // }
-
-        // public Model.User findUserById(int Id){
-        //     List<Model.User> allUsers = GetAllUsers();
-        //     foreach (Model.User user in allUsers)
-        //     {
-        //         if (user.Id == Id){
-        //             return user.Id;
-        //             break;
-        //         }
-        //         else{
-        //             throw InputInvalidException("User not found.");
-        //             goto loginstart;
-                    
-        //         }
-                
-        //     }
-
-        // }
-
-        // public int UserEmailSearch(string loginEmail){
-        //     List<Model.User> allUsers = GetAllUsers();
-        //     foreach (User user in allUsers)
-        //     {
-        //         if (user.Email == loginEmail){
-        //             return user.Id;
-        //             break;
-        //         }
-        //         else{
-        //             System.Console.WriteLine("User not found.");
-        //                 return -1;
-        //         }
-                
-        //     }
-        // }
         
+        
+        public Model.User AddUser(Model.User user)
+        {
+            Entity.User userToAdd = new Entity.User(){
+                Name = user.Name,
+                Email = user.Email,
+                Password = user.Password,
+                ManagerAccess = user.Access,
+                Age = user.Age
+            };
+            
+            //this method adds the restoToAdd obj to change tracker
+            userToAdd = _context.Add(userToAdd).Entity;
+
+            //the "changes" don't get executed until you call the SaveChanges method
+            _context.SaveChanges();
+
+            //this clears the changetracker so it returns to a clean slate
+            _context.ChangeTracker.Clear();
+
+            return new Model.User()
+            {
+                Id = userToAdd.Id,
+                Name = userToAdd.Name,
+                Password = userToAdd.Password,
+                Age = userToAdd.Age,
+                Access = userToAdd.ManagerAccess,
+                Email = userToAdd.Email
+            };
+        }
         public List<Model.User> GetAllUsers(){
 
             return _context.Users.Select(
@@ -70,6 +63,8 @@ namespace DL
             ).ToList();
 
         }
+
+        
 
         // public User UpdateUser(User userToUpdate){
 

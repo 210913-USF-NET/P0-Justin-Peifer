@@ -16,6 +16,7 @@ namespace DL
         //Users:
         // int UserEmailSearch();
         List<User> GetAllUsers();
+        User AddUser(User user);
         //StoreFront UpdateStoreFront(StoreFront storeToUpdate);
 
         //Products:

@@ -24,7 +24,7 @@ namespace UI
                         break;
 
                     case "2":
-                        Console.WriteLine("Edit this to redirect to user creation page.");
+                        MenuFactory.GetMenu("newuser").Start();
                         break;
                     case "3":
                         MenuFactory.GetMenu("manager").Start();

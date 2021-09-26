@@ -25,21 +25,17 @@ namespace UI
 
             // restaurantMenu.Start();
             System.Console.WriteLine("");
-            System.Console.WriteLine("");
             //for formatting
             switch (menuString.ToLower())
             {
                 case "manager":
-                System.Console.WriteLine("");
                     return new ManagerMenu(new BL(new DBRepo(context)));
                 case "storefront":
                     return new FranchiseMenu(new BL(new DBRepo(context)));
                 case "login":
                     return new LoginMenu(new BL(new DBRepo(context))); 
                 case "newuser":
-                    System.Console.WriteLine("This will bring you to the new user portal in the future.");
-                    return null;
-                //     return new NewUserMenu(new BL(new DBRepo(context)));
+                    return new NewUserMenu(new BL(new DBRepo(context)));
                 case "order":
                     return new OrderMenu(new BL(new DBRepo(context)));
                 //case "exit":

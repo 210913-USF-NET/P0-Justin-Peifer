@@ -41,6 +41,11 @@ namespace SBL
             return _repo.GetAllUsers();
         }
 
+        public User AddUser(User user)
+        {
+            return _repo.AddUser(user);
+        }
+
         public List<Product> GetAllProducts()
         {
             return _repo.GetAllProducts();
