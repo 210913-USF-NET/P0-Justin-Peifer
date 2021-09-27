@@ -3,6 +3,8 @@ using Models;
 using SBL;
 using DL;
 using System.Collections.Generic;
+using Serilog;
+
 namespace UI
 {
     public class OrderMenu : IMenu
@@ -20,25 +22,52 @@ namespace UI
 
             //just for testing
             Order currentOrder = _bl.NewOrder(currentUser.Id);
-            System.Console.WriteLine($"Your order number is {currentOrder.Id}");
+            System.Console.WriteLine($"Your order number is {currentOrder.Id}.");
 
-            List<Models.StoreFront> allStores = _bl.GetAllStoreFronts();
-            Models.StoreFront chosenStore = new StoreFrontService().SelectAStoreFront("Please select your store location.", allStores);
+            List<StoreFront> allStores = _bl.GetAllStoreFronts();
+            StoreFront chosenStore = new StoreFrontService().SelectAStoreFront("Please select your store location.", allStores);
             Console.WriteLine($"You've selected our Beelicious location in {chosenStore.State}");
             chosenStore = _bl.StoreById(chosenStore.Id);
+            
             Console.WriteLine($"You've selected {chosenStore.State}");
             List<LineItem> shoppingCart= new List<LineItem>();
             bool shopping = true;
             while(shopping){
-                shoppingCart.Add(SelectLineItem(chosenStore.Inventory));
+                shoppingCart.Add(SelectLineItem(chosenStore.Inventory, currentOrder.Id));
                 Console.WriteLine("Would you like to keep shopping? [Y/N]");
-                string input = Console.ReadLine().ToLower();
-
+                string keepShopping = Console.ReadLine().ToLower();
+                if (keepShopping == "n")
+                {
+                    currentOrder.LineItems = shoppingCart;
+                    shopping=false
+                    ;}
             }
-            // Models.Product chosenProduct =new StoreFrontService().SelectAProduct("Select a product to add to your cart.", allProducts);
-            
+
+            System.Console.WriteLine("Here are the Items you have:");
+            int totalPrice = 0;
+            foreach (LineItem item in currentOrder.LineItems)
+            {
+                Product productInfo = _bl.ProductByID(item.ProductId);
+                Console.WriteLine($"Name: {productInfo.Name}\nPrice: {productInfo.Price}\nQuantity: {item.Quantity}\n");
+                totalPrice= totalPrice + (productInfo.Price.GetValueOrDefault())*item.Quantity.GetValueOrDefault();
+            }
+            System.Console.WriteLine($"For a total of {totalPrice} dollars.");
+            System.Console.WriteLine("Is this your final order?[Y/N]");
+            string input = System.Console.ReadLine();
+            if (input.ToLower() =="y"){
+
+                _bl.PlaceOrder(chosenStore, currentOrder);
+                foreach (LineItem item in currentOrder.LineItems)
+                {
+                _bl.UpdateStock(chosenStore, item);
+                }
+                Log.Information($"An order was successfully placed by {currentUser.Name}!");
+            }
         }
-        public LineItem SelectLineItem(List<Inventory> storeInventory){
+
+
+
+        public LineItem SelectLineItem(List<Inventory> storeInventory, int orderId){
             itemselect:
             System.Console.WriteLine("Here's what we have in stock:");
             
@@ -68,10 +97,12 @@ namespace UI
                     System.Console.WriteLine("How many would you like to buy?");
                     string quantityChosen = Console.ReadLine();
                     int parsedQuantity;
-                    bool secondParse = Int32.TryParse(input, out parsedQuantity);
+                    bool secondParse = Int32.TryParse(quantityChosen, out parsedQuantity);
+                    System.Console.WriteLine($"You entered {parsedQuantity}");
+                    int storeID = storeInventory[parsedInput].StoreId.GetValueOrDefault();
                     if(secondParse && parsedQuantity >= 0 && parsedQuantity <= storeInventory[parsedInput].Quantity)
                     {
-                        LineItem addedItem = new LineItem(storeInventory[parsedInput].StoreId.Value, chosenProduct.Id, parsedQuantity);
+                        LineItem addedItem = new LineItem(orderId, storeID, chosenProduct.Id, parsedQuantity);
                         return addedItem;
                     }
                     else{

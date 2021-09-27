@@ -15,6 +15,9 @@ namespace SBL
         List<Inventory> GetAllInventory();
         User AddUser(User user);
         Order NewOrder(int userId);
+        Order PlaceOrder(StoreFront store, Order order);
+        List <Order> OrderByUserId(int UserId);
+        int UpdateStock(StoreFront storeToUpdate, LineItem orderedProduct);
 
         StoreFront StoreById(int id);
         // StoreFront CreateStoreFront(StoreFront store);

@@ -23,17 +23,17 @@ namespace UI
             {
                 Console.WriteLine("This is Franchise menu");
                 Console.WriteLine("What would you like to do?");
-                Console.WriteLine("[0] Add new stores");
-                Console.WriteLine("[1] View all stores");
+                Console.WriteLine("[0] Add a new store.");
+                Console.WriteLine("[1] View/edit store inventories");
                 Console.WriteLine("[x] Go Back To Main Menu");
 
                 switch (Console.ReadLine())
                 {
                     case "0":
-                        //CreateStoreFront();
+                        //_bl.CreateStoreFront();
                         break;
                     case "1":
-                        ViewAllStoreFronts();
+                        MenuFactory.GetMenu("inventory").Start();
                         break;
                     case "x":
                         exit = true;
@@ -43,36 +43,6 @@ namespace UI
                         break;
                 }
             } while (!exit);
-        }
-
-        // private void CreateStoreFront(){
-        //     System.Console.WriteLine("Creating new store");
-        //     System.Console.WriteLine("State: ");
-        //     string state = Console.ReadLine();
-        //     System.Console.WriteLine("Zipcode:");
-        //     int zipcode = int.Parse(Console.ReadLine());
-
-        //     StoreFront newStore = new StoreFront(state, zipcode);
-        //     _bl.CreateStoreFront(newStore);
-        //     Console.WriteLine($"You created {newStore.ToString()}");
-        // }
-        
-
-        
-        private void ViewAllStoreFronts()
-        {
-            List<StoreFront> allStores = _bl.GetAllStoreFronts();
-            if(allStores.Count == 0)
-            {
-                Console.WriteLine("You haven't added any stores to the database yet.");
-            }
-            else
-            {
-                foreach (StoreFront store in allStores)
-                {
-                    Console.WriteLine(store.ToString());
-                }
-            }
         }
     }
 }

@@ -56,6 +56,26 @@ namespace SBL
             return _repo.NewOrder(userId);
         }
 
+
+        public Order OrderInfoById(int id){
+            return _repo.OrderInfoById(id);
+        }
+        public List <Order> OrderByUserId(int UserId){
+            return _repo.OrderByUserId(UserId);
+        }
+        public Order PlaceOrder(StoreFront store, Order order){
+            return _repo.PlaceOrder(store, order);
+        }
+        
+        public int UpdateStock(StoreFront storeToUpdate, LineItem orderedProduct){
+            return _repo.UpdateStock(storeToUpdate, orderedProduct);
+        }
+
+        public int UpdateStock(Inventory inventoryToUpdate, int amountToAdd){
+                    return _repo.UpdateStock(inventoryToUpdate, amountToAdd);
+                }
+        
+
         public Product ProductByID(int id)
         {
             return _repo.ProductByID(id);

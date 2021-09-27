@@ -7,9 +7,10 @@ namespace Models
     {
         public Order() {}
 
-        public Order (int Id, List<LineItem> LineItems){
-            this.UserId = Id;
-            this.DateOrdered =DateTime.Now;
+        public Order (int OrderId, int UserId, List<LineItem> LineItems){
+            this.Id = OrderId;
+            this.UserId = UserId;
+            this.DateOrdered = DateTime.Now;
             this.LineItems = LineItems;
         }
         public int Id { get; set; }
@@ -18,7 +19,7 @@ namespace Models
         public int? UserId { get; set; }
 
         public DateTime? DateOrdered { get; set; }
-
+        public LineItem LineItem {get; set; }
         public List<LineItem> LineItems {get; set; }
     }
 }

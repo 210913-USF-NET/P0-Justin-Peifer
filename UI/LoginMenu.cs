@@ -68,8 +68,19 @@ namespace UI
                     if (loginUser.Access== true){
                         MenuFactory.GetMenu("manager").Start();
                     }
+
                     else{
+                        System.Console.WriteLine("Would you like to start an order or view your order history?");
+                        System.Console.WriteLine("[0] New Order\n[1] View completed orders.");
+                        string input = System.Console.ReadLine();
+                        if (input == "0")
+                        {
                         MenuFactory.GetMenu("order").Start();
+                        }
+                        if (input == "1")
+                        {
+                        MenuFactory.GetMenu("vieworders").Start();
+                        }
                     }
                 }
                 else{

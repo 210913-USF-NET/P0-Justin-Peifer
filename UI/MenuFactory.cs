@@ -8,7 +8,6 @@ namespace UI
 {
     public class MenuFactory
     {
-        
         public static Models.User currentUser;
         public static IMenu GetMenu(string menuString)
         { 
@@ -33,6 +32,10 @@ namespace UI
                     return new NewUserMenu(new BL(new DBRepo(context)));
                 case "order":
                     return new OrderMenu(new BL(new DBRepo(context)));
+                case "inventory":
+                    return new InventoryMenu(new BL(new DBRepo(context)));
+                case "vieworders":
+                    return new OrderViewer(new BL(new DBRepo(context)));
                 //case "exit":
                     //I want to make a function that will close all instances open, so you don't have a weird going back in each instance.
                 default:
