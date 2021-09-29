@@ -12,16 +12,16 @@ namespace DL
 
         Order PlaceOrder(StoreFront storeOrderedFrom, Order order);
 
-        int UpdateStock(StoreFront storeToUpdate, LineItem orderedProduct);
+        void UpdateStock(StoreFront storeToUpdate, List<LineItem> orderedProduct);
 
-        int UpdateStock(Inventory inventoryToUpdate, int amountToAdd);//method overloading
+        int UpdateStock(Inventory inventoryToUpdate, int amountToAdd, int storeId);//method overloading
 
 
         //Users:
-        // int UserEmailSearch();
+        User MakeUserManager(User newManager);
         List<User> GetAllUsers();
         User AddUser(User user);
-        
+        List<User> SearchUser(string search);
         //Products:
         List<Product> GetAllProducts();
         Product ProductByID(int id);
@@ -33,6 +33,7 @@ namespace DL
         List<Inventory> GetAllInventory();
 
         //Orders
+        // void ClearBadOrder(int orderId);
         Order NewOrder(int userId);
         List <Order> OrderByUserId(int UserId);
         Order OrderInfoById(int id);

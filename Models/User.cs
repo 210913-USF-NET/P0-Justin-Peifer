@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Serilog;
 
 namespace Models
 {
@@ -21,9 +22,52 @@ namespace Models
 
         public int? Age{get; set;}
         
-        public string Name{get; set;}
+        private string _name;
+        public string Name{
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                Regex pattern = new Regex ("^[A-Za-z ]+$");
+                if(value.Length == 0)
+                {
+                    InvalidUserNameException e = new InvalidUserNameException("User name can't be empty");
+                    Log.Warning(e.Message);
+                    throw e;
+                }
+                else if(!pattern.IsMatch(value))
+                {
+                    throw new InvalidUserNameException("User name can only have alphanumeric characters and spaces");
+                }
+                else
+                {
+                    _name = value;
+                }
+            }
+        }
 
-        public string Email{get; set;}// this will be a unique identifier for the user, but I'm using an Id for an identifier with less personal info
+        private string _email;
+
+        public string Email
+                {
+                    get
+                    {
+                        return _email;
+                    } 
+                    set
+                    {
+                        if (!value.Contains("@") ||value.StartsWith('@') || value.EndsWith('@'))
+                        {
+                            throw new EmailVerificationException("Emails must have an \"@\" sign, and cannot start or end with it.");
+                        }
+                        else{
+                            _email = value;
+                        }
+                    }
+                }
+        // this will be a unique identifier for the user, but I'm using an Id for an identifier with less personal info
 
         public string Password{get; set;}
 

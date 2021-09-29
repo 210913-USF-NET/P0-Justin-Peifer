@@ -9,12 +9,10 @@ namespace UI
     public class FranchiseMenu : IMenu
     {
         private IBL _bl;
-        //private StoreFrontService _storeFrontService;
 
         public FranchiseMenu(IBL bl)
         {
             _bl = bl;
-            // _storeFrontService = storeFrontService;
         }
 
         public void Start(){

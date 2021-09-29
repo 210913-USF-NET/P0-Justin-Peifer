@@ -21,13 +21,16 @@ namespace UI
                 {
                     case "1":
                         MenuFactory.GetMenu("login").Start();
+                        exit = true;
                         break;
 
                     case "2":
                         MenuFactory.GetMenu("newuser").Start();
+                        exit = true;
                         break;
                     case "3":
                         MenuFactory.GetMenu("manager").Start();
+                        exit = true;
                         break;
 
                     case "x":
@@ -39,6 +42,7 @@ namespace UI
                         Console.WriteLine("Invalid input");
                         break;
                 }
-            } while (!exit);}
+            } while (!exit);
+            }
     }
 }

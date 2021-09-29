@@ -9,12 +9,10 @@ namespace UI
     public class ManagerMenu : IMenu
     {
         private IBL _bl;
-        //private StoreFrontService _storeFrontService;
 
         public ManagerMenu(IBL bl)
         {
             _bl = bl;
-            // _storeFrontService = storeFrontService;
         }
         public void Start()
         {
@@ -24,21 +22,17 @@ namespace UI
             {
                 Console.WriteLine("Welcome to the Beelicious Manager Menu!");
                 Console.WriteLine("Press [1] to view and edit customers data.");
-                Console.WriteLine("Press [2] to view order details and place new orders.");
-                Console.WriteLine("Press [3] to view and edit store information.");
-                Console.WriteLine("Press[x] to leave.");
+                Console.WriteLine("Press [2] to view and edit store information.");
+                Console.WriteLine("Press [x] to leave.");
                 input = Console.ReadLine();
 
                 switch (input)
                 {
                     case "1":
-                        Console.WriteLine("Edit this to redirect to customers menu");
+                        MenuFactory.GetMenu("customermanagement").Start();
                         break;
-
+                        
                     case "2":
-                        Console.WriteLine("Edit this to redirect to orders menu");
-                        break;
-                    case "3":
                         MenuFactory.GetMenu("storefront").Start();
                         break;
 

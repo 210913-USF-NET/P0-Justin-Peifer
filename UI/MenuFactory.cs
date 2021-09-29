@@ -36,6 +36,8 @@ namespace UI
                     return new InventoryMenu(new BL(new DBRepo(context)));
                 case "vieworders":
                     return new OrderViewer(new BL(new DBRepo(context)));
+                case "customermanagement":
+                    return new CustomerManagementMenu(new BL(new DBRepo(context)));
                 //case "exit":
                     //I want to make a function that will close all instances open, so you don't have a weird going back in each instance.
                 default:

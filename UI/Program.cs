@@ -1,5 +1,7 @@
 ﻿using System;
 using Serilog;
+using System.Threading;
+using System.Runtime.InteropServices;
 
 namespace UI
 {
@@ -14,9 +16,15 @@ namespace UI
         .CreateLogger();
 
         Log.Information("Application Starting...");
+        
 
-            new StartMenu().Start(); 
+        new StartMenu().Start(); 
+        if (OperatingSystem.IsWindows()){//soundplayer is only available in windows, so this will prevent the soundplayer from trying to load in other OS
 
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\Justin Peifer\Desktop\bye-bye.wav");
+            player.Play();
+            Thread.Sleep(4000);//so that the audio can play before the application completely closes
+        }
         Log.Information("Application Closing...");
         Log.CloseAndFlush();
         }

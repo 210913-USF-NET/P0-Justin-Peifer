@@ -14,10 +14,16 @@ namespace SBL
         List<Product> GetAllProducts();
         List<Inventory> GetAllInventory();
         User AddUser(User user);
+
+        User MakeUserManager(User newManager);
+        List<User> SearchUser(string search);
         Order NewOrder(int userId);
         Order PlaceOrder(StoreFront store, Order order);
+        // void ClearBadOrder(int orderId);
         List <Order> OrderByUserId(int UserId);
-        int UpdateStock(StoreFront storeToUpdate, LineItem orderedProduct);
+        void UpdateStock(StoreFront storeToUpdate, List<LineItem> orderedProduct);
+        
+        int UpdateStock(Inventory inventoryToUpdate, int amountToAdd, int storeId);
 
         StoreFront StoreById(int id);
         // StoreFront CreateStoreFront(StoreFront store);

@@ -32,15 +32,41 @@ namespace UI
             Console.WriteLine($"You've selected {chosenStore.State}");
             List<LineItem> shoppingCart= new List<LineItem>();
             bool shopping = true;
+            reopenCart:
             while(shopping){
-                shoppingCart.Add(SelectLineItem(chosenStore.Inventory, currentOrder.Id));
-                Console.WriteLine("Would you like to keep shopping? [Y/N]");
-                string keepShopping = Console.ReadLine().ToLower();
-                if (keepShopping == "n")
+                
+                LineItem itemToAdd = SelectLineItem(chosenStore.Inventory, currentOrder.Id);
+                bool hasItem= false;
+                foreach (LineItem item in shoppingCart){
+                    if (item.ProductId == itemToAdd.ProductId){
+                        item.Quantity= itemToAdd.Quantity;
+                        hasItem=true;
+                    }
+                }
+                if (hasItem ==false)
                 {
+                    shoppingCart.Add(itemToAdd);
+                }
+                shoppingDecision:
+                Console.WriteLine("[1] Keep Shopping");
+                Console.WriteLine("[2] Checkout");
+                Console.WriteLine("[3] Exit");
+                string keepShopping = Console.ReadLine().ToLower();
+                switch(keepShopping){
+
+                case "1": break;
+                case "2":
                     currentOrder.LineItems = shoppingCart;
-                    shopping=false
-                    ;}
+                    shopping=false;
+                    break;
+                case "3": 
+                    System.Console.WriteLine("Thank you, we hope to see you soon!");
+                    // _bl.ClearBadOrder(currentOrder.Id);
+                    return;
+                default:
+                    System.Console.WriteLine("Invalid input, please select a number between 1 and 3.");
+                    goto shoppingDecision;
+                }
             }
 
             System.Console.WriteLine("Here are the Items you have:");
@@ -57,11 +83,16 @@ namespace UI
             if (input.ToLower() =="y"){
 
                 _bl.PlaceOrder(chosenStore, currentOrder);
-                foreach (LineItem item in currentOrder.LineItems)
-                {
-                _bl.UpdateStock(chosenStore, item);
-                }
+                
+                _bl.UpdateStock(chosenStore, currentOrder.LineItems);
+                
+                System.Console.WriteLine($"Thank you for your order! We will be waiting for you at our Beelicious location in {chosenStore.State}!");
+                
                 Log.Information($"An order was successfully placed by {currentUser.Name}!");
+                
+            }
+            else if (input.ToLower() =="n"){
+                goto reopenCart;
             }
         }
 
@@ -76,8 +107,10 @@ namespace UI
                 Product productInfo = _bl.ProductByID(storeInventory[i].ProductId.GetValueOrDefault());
                 Console.WriteLine($"[{i}] {productInfo.Name}");
             }
+            System.Console.WriteLine("Please select the number of the item you want.");
             
             string input = Console.ReadLine();
+            
             int parsedInput;
 
             //pass by reference in, out, ref
@@ -85,6 +118,11 @@ namespace UI
             if(parseSuccess && parsedInput >= 0 && parsedInput < storeInventory.Count)
             {   
                 Product chosenProduct = _bl.ProductByID(storeInventory[parsedInput].ProductId.GetValueOrDefault());
+                bool alcoholChecker = chosenProduct.Alcohol.HasValue ? chosenProduct.Alcohol.Value : false;//if an employee didn't put an alcohol label on an item, we will assume it is nonalcoholic.
+                if(alcoholChecker && MenuFactory.currentUser.Age<21){
+                    System.Console.WriteLine("Sorry, this product contains alcohol. Try some of our other honey products instead!");
+                    goto itemselect;
+                }
                 System.Console.WriteLine(chosenProduct.Description);
             
                 System.Console.WriteLine($"Would you like to buy this item? We have {storeInventory[parsedInput].Quantity} in stock. (Y/N)");
@@ -100,10 +138,14 @@ namespace UI
                     bool secondParse = Int32.TryParse(quantityChosen, out parsedQuantity);
                     System.Console.WriteLine($"You entered {parsedQuantity}");
                     int storeID = storeInventory[parsedInput].StoreId.GetValueOrDefault();
-                    if(secondParse && parsedQuantity >= 0 && parsedQuantity <= storeInventory[parsedInput].Quantity)
+                    if(secondParse && parsedQuantity > 0 && parsedQuantity <= storeInventory[parsedInput].Quantity)
                     {
                         LineItem addedItem = new LineItem(orderId, storeID, chosenProduct.Id, parsedQuantity);
                         return addedItem;
+                    }
+                    else if (parsedQuantity<1){
+                        System.Console.WriteLine("Quantity must be higher than 0. Redirecting to the main ordering section...");
+                        goto itemselect;
                     }
                     else{
                         System.Console.WriteLine($"Invalid input. We have {storeInventory[parsedInput].Quantity} in stock.");
@@ -112,11 +154,12 @@ namespace UI
                 
                 }
                 else {
+                    System.Console.WriteLine("Invalid input, redirecting to the product selection page...");
                     goto itemselect;
                     }
             }
             else {
-                Console.WriteLine("invalid input");
+                Console.WriteLine("Invalid input.");
                 goto itemselect;
             }
         }

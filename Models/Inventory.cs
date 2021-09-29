@@ -9,7 +9,25 @@ namespace Models
         public int? StoreId { get; set; }
         
         public int? ProductId { get; set; }
-        public int? Quantity { get; set; }
+        private int? _quantity;
+
+        public int? Quantity
+                {
+                    get
+                    {
+                        return _quantity;
+                    } 
+                    set
+                    {
+                        if (value<0)
+                        {
+                            throw new NegativeInventoryException("Inventory for a product cannot be negative.");
+                        }
+                        else{
+                            _quantity = value;
+                        }
+                    }
+                }
         public List<Product> Products { get; set; }
 
         public virtual Product Product { get; set; }

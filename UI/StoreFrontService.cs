@@ -29,7 +29,7 @@ namespace UI
                 return listToPick[parsedInput];
             }
             else {
-                Console.WriteLine("invalid input");
+                Console.WriteLine("Invalid input, please try again.");
                 goto selectStore;
             }
         }

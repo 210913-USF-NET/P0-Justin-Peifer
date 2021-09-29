@@ -20,21 +20,14 @@ namespace SBL
             return _repo.GetAllStoreFronts();
         }
 
-        // public StoreFront CreateStoreFront(StoreFront store)
-        // {
-        //     return _repo.CreateStoreFront(store);
-        // }
+        public User MakeUserManager(User newManager)
+        {
+            return _repo.MakeUserManager(newManager);
+        }
 
-        // public StoreFront UpdateStoreFront(StoreFront storeToUpdate)
-        // {
-        //     //add logic to update StoreFront
-        //     return _repo.UpdateStoreFront(storeToUpdate);
-        // }
-        
-        // public User AddUser(User user)
-        // {
-        //     return _repo.AddUser(user);
-        // }
+        public List<User> SearchUser(string search){
+            return _repo.SearchUser(search);
+        }
 
         public List<User> GetAllUsers()
         {
@@ -51,6 +44,10 @@ namespace SBL
             return _repo.GetAllProducts();
             
         }
+
+        // public void ClearBadOrder(int orderId){
+        //     return ClearBadOrder (orderId);
+        // }
         public Order NewOrder(int userId)
         {
             return _repo.NewOrder(userId);
@@ -67,12 +64,12 @@ namespace SBL
             return _repo.PlaceOrder(store, order);
         }
         
-        public int UpdateStock(StoreFront storeToUpdate, LineItem orderedProduct){
-            return _repo.UpdateStock(storeToUpdate, orderedProduct);
+        public void UpdateStock(StoreFront storeToUpdate, List<LineItem> orderedProduct){
+            _repo.UpdateStock(storeToUpdate, orderedProduct);
         }
 
-        public int UpdateStock(Inventory inventoryToUpdate, int amountToAdd){
-                    return _repo.UpdateStock(inventoryToUpdate, amountToAdd);
+        public int UpdateStock(Inventory inventoryToUpdate, int amountToAdd, int storeId){
+                    return _repo.UpdateStock(inventoryToUpdate, amountToAdd, storeId);
                 }
         
 
