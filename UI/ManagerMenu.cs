@@ -33,7 +33,7 @@ namespace UI
                         break;
                         
                     case "2":
-                        MenuFactory.GetMenu("storefront").Start();
+                        MenuFactory.GetMenu("inventory").Start();
                         break;
 
                     case "x":

@@ -15,7 +15,7 @@ namespace DL
         void UpdateStock(StoreFront storeToUpdate, List<LineItem> orderedProduct);
 
         int UpdateStock(Inventory inventoryToUpdate, int amountToAdd, int storeId);//method overloading
-
+        
 
         //Users:
         User MakeUserManager(User newManager);

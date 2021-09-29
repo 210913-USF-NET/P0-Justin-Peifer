@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DL</name>
+    </assembly>
+    <members>
+        <member name="M:DL.DBRepo.NewOrder(System.Int32)">
+            <summary>
+            Starts a new order for the customer by grabbing a new Order number from the database
+            </summary>
+            <param name="UserId"> userID to be linked to the newly created order</param>
+            <returns>An empty order that has the new OrderId with the UserId contained as well</returns>
+        </member>
+        <member name="M:DL.DBRepo.AddUser(Models.User)">
+            <summary>
+            Adds a new user to the database
+            </summary>
+            <param name="user">The collected info from the NewUserMenu</param>
+            <returns>returns an updated version of the submitted User, complete with UserId given by the database.</returns>
+        </member>
+        <member name="M:DL.DBRepo.GetAllUsers">
+            <summary>
+            Gets a list of all users stored in the database
+            </summary>
+            <returns>List of all Users.</returns>
+        </member>
+        <member name="M:DL.DBRepo.SearchUser(System.String)">
+            <summary>
+            Searchest for a user based on their name
+            </summary>
+            <param name="search"></param>
+            <returns>A list of all users that fit under the search</returns>
+        </member>
+        <member name="M:DL.DBRepo.MakeUserManager(Models.User)">
+            <summary>
+            Changes a customer account into a manager account
+            by changing the ".ManagerAccess" boolean to "True"
+            </summary>
+            <param name="newManager">the user to change from customer to manager</param>
+            <returns>The updated user object</returns>
+        </member>
+        <member name="M:DL.DBRepo.OrderInfoById(System.Int32)">
+            <summary>
+            Gets more detailed order information, including LineItems, based on OrderId
+            </summary>
+            <param name="id">The OrderId for the order we are searching</param>
+            <returns>The Order's information</returns>
+        </member>
+        <member name="M:DL.DBRepo.OrderByUserId(System.Int32)">
+            <summary>
+            Gets the order history of a user based on his/her UserId
+            </summary>
+            <param name="UserId">The User's ID</param>
+            <returns>A list of every order that the User has made</returns>
+        </member>
+        <member name="M:DL.DBRepo.GetAllOrders">
+            <summary>
+            Gets a list of every order in the database
+            </summary>
+            <returns>The list of every order</returns>
+        </member>
+        <member name="M:DL.DBRepo.PlaceOrder(Models.StoreFront,Models.Order)">
+            <summary>
+            Updates the order that was opened at the start of the OrderMenu to add bought LineItems
+            </summary>
+            <param name="storeOrderedFrom"> The Store that the order was placed at</param>
+            <param name="order">The Order, should include LineItems</param>
+            <returns>Returns the placed order</returns>
+        </member>
+        <member name="M:DL.DBRepo.UpdateStock(Models.StoreFront,System.Collections.Generic.List{Models.LineItem})">
+            <summary>
+            Updates a store's inventory quantity based off of attributes used for placing an order
+            </summary>
+            <param name="storeToUpdate">The store that needs to be updated</param>
+            <param name="orderedProduct"> A list of LineItems that were bought. This needs to be subtracted from the store's inventory</param>
+        </member>
+        <member name="M:DL.DBRepo.UpdateStock(Models.Inventory,System.Int32,System.Int32)">
+            <summary>
+            Updates from a Manager's perspective, using an int with
+            </summary>
+            <param name="inventoryToUpdate"></param>
+            <param name="amountToAdd"></param>
+            <param name="storeId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DL.DBRepo.GetAllStoreFronts">
+            <summary>
+            Gets a list of all existing storefronts
+            </summary>
+            <returns>A list of all existing storefronts</returns>
+        </member>
+        <member name="M:DL.DBRepo.StoreById(System.Int32)">
+            <summary>
+            Looks up a detailed view of a store, including its inventory, from the store's unique Id
+            </summary>
+            <param name="id">The storefront's Id</param>
+            <returns>A detailed object of the store, which includes a list of the store's inventory.</returns>
+        </member>
+        <member name="M:DL.DBRepo.GetAllProducts">
+            <summary>
+            Gets a list of every product that Beelicious sells
+            </summary>
+            <returns>List of all products</returns>
+        </member>
+        <member name="M:DL.DBRepo.ProductByID(System.Int32)">
+            <summary>
+            Looks up a detailed view of a product, including the inventory, based on its Id
+            </summary>
+            <param name="id"> the product's unique Id</param>
+            <returns>a Product and the inventory that each store has of it</returns>
+        </member>
+        <member name="M:DL.DBRepo.GetAllInventory">
+            <summary>
+            gets a list of all inventory Beelicious has
+            </summary>
+            <returns>A list of every inventory item</returns>
+        </member>
+    </members>
+</doc>

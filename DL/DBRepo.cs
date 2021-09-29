@@ -199,6 +199,12 @@ namespace DL
             ).ToList();
         }
 
+        /// <summary>
+        /// finds the order history for a given store
+        /// </summary>
+        /// <param name="store">the store that we're looking for orders from</param>
+        /// <returns>Returns a list of all orders made at a specific store</returns>
+
         // public void ClearBadOrder(int orderId){
         // var order = _context.Orders.Where(order => order.UserId.Equals(orderId)).FirstOrDefault();
         //     _context.Orders.DeleteObject(order);
@@ -245,7 +251,7 @@ namespace DL
             }
 
         /// <summary>
-        /// 
+        /// Updates from a Manager's perspective, using an int with
         /// </summary>
         /// <param name="inventoryToUpdate"></param>
         /// <param name="amountToAdd"></param>
@@ -269,6 +275,10 @@ namespace DL
 
         }
 
+        /// <summary>
+        /// Gets a list of all existing storefronts
+        /// </summary>
+        /// <returns>A list of all existing storefronts</returns>
         public List<Model.StoreFront> GetAllStoreFronts(){
 
             //same as select * from StoreFront in sql query
@@ -282,6 +292,11 @@ namespace DL
             
         }
 
+        /// <summary>
+        /// Looks up a detailed view of a store, including its inventory, from the store's unique Id
+        /// </summary>
+        /// <param name="id">The storefront's Id</param>
+        /// <returns>A detailed object of the store, which includes a list of the store's inventory.</returns>
         public Model.StoreFront StoreById(int id)
         {
             Entity.StoreFront storeById = 
@@ -303,7 +318,10 @@ namespace DL
             };
         }
 
-        //products
+        /// <summary>
+        /// Gets a list of every product that Beelicious sells
+        /// </summary>
+        /// <returns>List of all products</returns>
         public List<Model.Product> GetAllProducts(){
 
                     return _context.Products.AsNoTracking().Select(
@@ -317,6 +335,11 @@ namespace DL
                     ).ToList();
                 }
                 
+        /// <summary>
+        /// Looks up a detailed view of a product, including the inventory, based on its Id
+        /// </summary>
+        /// <param name="id"> the product's unique Id</param>
+        /// <returns>a Product and the inventory that each store has of it</returns>
         public Model.Product ProductByID(int id)
         {
             Entity.Product productByID = 
@@ -340,7 +363,10 @@ namespace DL
         }
 
         //inventory
-
+        /// <summary>
+        /// gets a list of all inventory Beelicious has
+        /// </summary>
+        /// <returns>A list of every inventory item</returns>
         public List<Model.Inventory> GetAllInventory(){
             //same as select * from Inventory in sql query
             return _context.Inventories.AsNoTracking().Select(

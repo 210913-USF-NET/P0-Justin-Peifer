@@ -24,8 +24,6 @@ namespace UI
             {
                 case "manager":
                     return new ManagerMenu(new BL(new DBRepo(context)));
-                case "storefront":
-                    return new FranchiseMenu(new BL(new DBRepo(context)));
                 case "login":
                     return new LoginMenu(new BL(new DBRepo(context))); 
                 case "newuser":
@@ -38,8 +36,6 @@ namespace UI
                     return new OrderViewer(new BL(new DBRepo(context)));
                 case "customermanagement":
                     return new CustomerManagementMenu(new BL(new DBRepo(context)));
-                //case "exit":
-                    //I want to make a function that will close all instances open, so you don't have a weird going back in each instance.
                 default:
                     return null;
             }
