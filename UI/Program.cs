@@ -23,7 +23,7 @@ namespace UI
 
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\Justin Peifer\Desktop\bye-bye.wav");
             player.Play();
-            Thread.Sleep(4000);//so that the audio can play before the application completely closes
+            Thread.Sleep(3000);//so that the audio can play before the application completely closes
         }
         Log.Information("Application Closing...");
         Log.CloseAndFlush();

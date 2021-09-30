@@ -48,7 +48,8 @@ namespace UI
                 break;
                 
             case "1": 
-                System.Console.WriteLine(_bl.MakeUserManager(chosenUser));
+                _bl.MakeUserManager(chosenUser);
+                System.Console.WriteLine("Conversion Success!");
                 break;
             default: System.Console.WriteLine("Invalid input."); goto editingchoice;
 
